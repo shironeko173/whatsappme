@@ -19,7 +19,7 @@ class CreateWAController extends Controller
         return view('home');
     }
 
-    public function buatUrl()
+    public function generate()
     {
         return view('buaturl');
     }
