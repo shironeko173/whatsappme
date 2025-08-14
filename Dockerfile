@@ -10,7 +10,10 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    # Tambahkan ini untuk MySQL:
+    default-mysql-client \  
+    docker-php-ext-install pdo_mysql pdo_pgsql mbstring zip exif pcntl gd
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl gd
