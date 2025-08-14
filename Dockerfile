@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     libpng-dev \
     libzip-dev \
-    libonick-dev \
+    libonig-dev \
     libxml2-dev \
     zip \
     unzip
