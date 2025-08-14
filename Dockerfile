@@ -1,9 +1,7 @@
-# Stage 1: Build
+# Stage 1: Builder
 FROM php:8.0-fpm AS builder
 
-WORKDIR /var/www/html
-
-# Install dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -20,25 +18,39 @@ RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl gd
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copy hanya yang dibutuhkan untuk build
-COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader
+WORKDIR /var/www/html
 
-# Copy semua file project
+# Copy composer files first (optimize layer caching)
+COPY composer.json composer.lock ./
+
+# Install dependencies (no dev)
+RUN composer install --no-dev --no-scripts --no-autoloader --optimize-autoloader
+
+# Copy all files
 COPY . .
 
-# Stage 2: Runtime
+# Copy .env.example to .env (jika tidak ada)
+RUN if [ ! -f .env ]; then \
+        cp .env.example .env; \
+    fi
+
+# Fix permissions
+RUN chown -R www-data:www-data /var/www/html/storage \
+    && chmod -R 775 /var/www/html/storage
+
+# Optimize Laravel
+RUN composer dump-autoload --optimize \
+    && php artisan config:cache \
+    && php artisan route:cache \
+    && php artisan view:cache
+
+# Stage 2: Production
 FROM php:8.0-fpm
 
 COPY --from=builder /var/www/html /var/www/html
 
-# Set permission
-RUN chown -R www-data:www-data /var/www/html/storage
+# Set working directory
+WORKDIR /var/www/html
 
-# Optimasi Laravel
-RUN php artisan config:cache && \
-    php artisan route:cache && \
-    php artisan view:cache
-
-# Jalankan aplikasi
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Run artisan commands (ensure environment is available)
+CMD ["sh", "-c", "php artisan config:cache && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"]
