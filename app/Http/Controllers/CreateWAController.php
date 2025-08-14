@@ -18,6 +18,10 @@ class CreateWAController extends Controller
     {
         return view('home');
     }
+    public function index2()
+    {
+        return view('buaturl');
+    }
 
     public function buatUrl()
     {
