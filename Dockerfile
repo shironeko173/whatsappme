@@ -29,9 +29,12 @@ RUN composer install --no-dev --no-scripts --no-autoloader --optimize-autoloader
 # Copy all files
 COPY . .
 
-# Copy .env.example to .env (jika tidak ada)
+# Copy .env.example ke .env (jika tidak ada)
 RUN if [ ! -f .env ]; then \
-        cp .env.example .env; \
+        cp .env.example .env && \
+        if [ -z "$(grep 'APP_KEY=' .env)" ]; then \
+            php artisan key:generate --force --no-interaction; \
+        fi; \
     fi
 
 # Fix permissions
