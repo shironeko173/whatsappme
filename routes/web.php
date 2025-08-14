@@ -20,5 +20,5 @@ Route::get('/YourLink/{urlacak}', [CreateWAController::class, 'show']);
 Route::post('/create', [CreateWAController::class, 'store']);
 Route::post('/send', [CreateWAController::class, 'create']);
 Route::get('/', [CreateWAController::class, 'index']);
-Route::get('/URL-Spesial', [CreateWAController::class, 'buatUrl']);
-Route::get('/test', [CreateWAController::class, 'index2']);
+// Route::get('/URL-Spesial', [CreateWAController::class, 'buatUrl']);
+Route::get('/URL-Spesial', function () { return view('buaturl'); });

@@ -296,7 +296,8 @@
         if(input.value == "") {
             var output = 'Your url is..';
         } else {
-        var output = 'wa.isentralmedia.com/' + input.value;
+            var baseUrl = window.location.origin;
+            var output = baseUrl + '/' + input.value;
         }
 
         // console.log(output);

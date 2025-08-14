@@ -16,10 +16,6 @@ class CreateWAController extends Controller
      */
     public function index()
     {
-        return view('buaturl');
-    }
-    public function index2()
-    {
         return view('home');
     }
 
