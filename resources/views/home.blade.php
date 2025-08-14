@@ -7,6 +7,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
 
     <!-- Favicon -->
     <link href="{!! asset('styles') !!}/images/logo.png" rel="icon">
