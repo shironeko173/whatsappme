@@ -14,20 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/new', function () {
-//     return view('home');
-// });
 
-Route::get('/URL-Spesial', function () {
-    return view('buaturl');
-});
-
-// Route::get('/YourLink', function () {
-//     return view('success');
-// });
- 
 Route::get('/{code}', [CreateWAController::class, 'link']);
 Route::get('/YourLink/{urlacak}', [CreateWAController::class, 'show']);
 Route::post('/create', [CreateWAController::class, 'store']);
 Route::post('/send', [CreateWAController::class, 'create']);
 Route::get('/', [CreateWAController::class, 'index']);
+Route::get('/URL-Spesial', [CreateWAController::class, 'buatUrl']);

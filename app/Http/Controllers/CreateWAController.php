@@ -19,6 +19,11 @@ class CreateWAController extends Controller
         return view('home');
     }
 
+    public function buatUrl()
+    {
+        return view('buaturl');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -65,7 +70,7 @@ class CreateWAController extends Controller
         $urlacak =generate_password();
         
         //Cek URL udah ada atau belum
-        $dataurl = WhatsAppMe::where('Weburl','http://whatsappme.test/'.$request->url)->count();
+        $dataurl = WhatsAppMe::where('Weburl', url($request->url))->count();
         if ($dataurl > 0) {
             return back()->with('error', 'Mohon maaf Url ini sudah digunakan.');
         };
@@ -75,7 +80,7 @@ class CreateWAController extends Controller
             // $data['email'] = $request->email;
             $data['urlacak'] = $urlacak;
 
-            $data['Weburl'] = 'http://whatsappme.test/'.$request->url;
+            $data['Weburl'] =  url($request->url);
 
             //pakai teks atau tidak
             if ($request->teks) {
@@ -113,7 +118,7 @@ class CreateWAController extends Controller
 
     public function link($code)
     {
-        $link = WhatsAppMe::where('Weburl', 'http://whatsappme.test/'.$code)->first();
+        $link = WhatsAppMe::where('Weburl',  url($code))->first();
 
         if (Browser::isDesktop()) {
             if ($link){
