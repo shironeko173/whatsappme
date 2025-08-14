@@ -13,10 +13,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     # Tambahkan ini untuk MySQL:
     default-mysql-client \  
-    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl gd
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl gd
+    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl gd \
+    && docker-php-ext-enable pdo_mysql
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
