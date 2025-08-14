@@ -51,10 +51,20 @@ RUN composer dump-autoload --optimize \
 # Stage 2: Production
 FROM php:8.0-fpm
 
+# Install ekstensi MySQL di production juga
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libzip-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    default-mysql-client \
+    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl gd \
+    && docker-php-ext-enable pdo_mysql
+
 COPY --from=builder /var/www/html /var/www/html
 
-# Set working directory
 WORKDIR /var/www/html
 
-# Run artisan commands (ensure environment is available)
 CMD ["sh", "-c", "php artisan config:cache && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"]
