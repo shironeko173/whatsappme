@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     # Tambahkan ini untuk MySQL:
     default-mysql-client \  
-    docker-php-ext-install pdo_mysql pdo_pgsql mbstring zip exif pcntl gd
+    && docker-php-ext-install pdo_mysql pdo_pgsql mbstring zip exif pcntl gd
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl gd
