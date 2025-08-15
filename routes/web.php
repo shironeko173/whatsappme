@@ -23,6 +23,10 @@ Route::get('/', [CreateWAController::class, 'index']);
 Route::get('/URL-Spesial', [CreateWAController::class, 'generate']);
 Route::get('/special-test-url', [CreateWAController::class, 'generate']);
 // Di routes/web.php
+// routes/web.php
+Route::get('/URL-Spesial-debug', function() {
+    return app()->make(\App\Http\Controllers\CreateWAController::class)->generate();
+})->withoutMiddleware(['web']);
 Route::fallback(function () {
     return response()->json([
         'debug_info' => [
