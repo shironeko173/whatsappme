@@ -1,5 +1,5 @@
 # Stage 1: Builder
-FROM php:8.0-fpm AS builder
+FROM php:8.2-fpm AS builder
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -49,7 +49,7 @@ RUN composer dump-autoload --optimize \
     && php artisan view:cache
 
 # Stage 2: Production
-FROM php:8.0-fpm
+FROM php:8.2-fpm
 
 # Install ekstensi MySQL di production juga
 RUN apt-get update && apt-get install -y \
