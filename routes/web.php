@@ -21,21 +21,4 @@ Route::post('/create', [CreateWAController::class, 'store']);
 Route::post('/send', [CreateWAController::class, 'create']);
 Route::get('/', [CreateWAController::class, 'index']);
 Route::get('/URL-Spesial', [CreateWAController::class, 'generate']);
-Route::get('/special-test-url', [CreateWAController::class, 'generate']);
-// Di routes/web.php
-// routes/web.php
-Route::get('/URL-Spesial-debug', function() {
-    return app()->make(\App\Http\Controllers\CreateWAController::class)->generate();
-})->withoutMiddleware(['web']);
-Route::fallback(function () {
-    return response()->json([
-        'debug_info' => [
-            'current_url' => url()->current(),
-            'request_uri' => $_SERVER['REQUEST_URI'] ?? null,
-            'headers' => request()->headers->all(),
-            'trusted_proxies' => config('trustedhost.proxies')
-        ],
-        'message' => 'Route not found'
-    ], 404);
-});
-// Route::get('/URL-Spesial', function () { return view('buaturl'); });
+

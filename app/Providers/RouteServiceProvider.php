@@ -27,11 +27,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Tambahkan ini untuk debugging
-        Log::info('RouteServiceProvider booted', [
-            'APP_URL' => config('app.url'),
-            'Request URL' => request()?->fullUrl()
-        ]);
 
         $this->configureRateLimiting();
 

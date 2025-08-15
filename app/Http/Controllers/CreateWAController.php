@@ -22,12 +22,6 @@ class CreateWAController extends Controller
 
  public function generate()
 {
-    Log::info('Generate method accessed', [
-        'full_url' => request()->fullUrl(),
-        'headers' => request()->headers->all(),
-        'server' => request()->server()
-    ]);
-    
     return view('buaturl');
 }
 
