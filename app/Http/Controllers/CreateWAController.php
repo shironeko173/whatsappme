@@ -6,6 +6,7 @@ use hisorange\BrowserDetect\Parser as Browser;
 use App\Models\WhatsAppMe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log; 
 
 class CreateWAController extends Controller
 {
@@ -19,10 +20,16 @@ class CreateWAController extends Controller
         return view('home');
     }
 
-    public function generate()
-    {
-        return view('buaturl');
-    }
+ public function generate()
+{
+    Log::info('Generate method accessed', [
+        'full_url' => request()->fullUrl(),
+        'headers' => request()->headers->all(),
+        'server' => request()->server()
+    ]);
+    
+    return view('buaturl');
+}
 
     /**
      * Show the form for creating a new resource.
