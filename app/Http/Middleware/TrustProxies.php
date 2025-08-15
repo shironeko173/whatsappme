@@ -12,7 +12,13 @@ class TrustProxies extends Middleware
      *
      * @var array<int, string>|string|null
      */
-    protected $proxies = '*'; // Trust all proxies
+    protected $proxies = [
+        'whatsappme-production.up.railway.app',
+        '*.railway.app',
+        '*.up.railway.app',
+        '127.0.0.1',
+        'localhost'
+    ];
 
     /**
      * The headers that should be used to detect proxies.
