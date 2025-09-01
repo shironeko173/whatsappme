@@ -81,7 +81,7 @@ class CreateWAController extends Controller
             // $data['email'] = $request->email;
             $data['urlacak'] = $urlacak;
 
-            $data['Weburl'] =  url($request->url);
+            $data['Weburl'] =  url('link/'.$request->url);
 
             //pakai teks atau tidak
             if ($request->teks) {
@@ -112,14 +112,14 @@ class CreateWAController extends Controller
 
         if ($cek > 0){
             return view('success',compact('myWA'));
-            // return $myWA;
+            // return $myWA;/
         }
         return redirect()->to(url('/'));
     }
 
     public function link($code)
     {
-        $link = WhatsAppMe::where('Weburl',  url($code))->first();
+        $link = WhatsAppMe::where('Weburl',  url('link/'.$code))->first();
 
         if (Browser::isDesktop()) {
             if ($link){

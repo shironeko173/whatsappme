@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/{code}', [CreateWAController::class, 'link']);
+Route::get('/link/{code}', [CreateWAController::class, 'link']);
 Route::get('/YourLink/{urlacak}', [CreateWAController::class, 'show']);
 Route::post('/create', [CreateWAController::class, 'store']);
 Route::post('/send', [CreateWAController::class, 'create']);
