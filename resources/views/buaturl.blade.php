@@ -91,7 +91,7 @@
     <!-- Navbar Start -->
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-dark px-5 py-lg-0">
-            <a href="index.html" class="navbar-brand p-0">
+            <a href="/" class="navbar-brand p-0">
                 <h1 class="m-0">
                     <img style="margin-bottom: 3%" src="{!! asset('styles') !!}/images/logo.png" width="50px"><font style="color: rgb(27, 112, 83)"> WhatsAppMe</font>
                 </h1>
